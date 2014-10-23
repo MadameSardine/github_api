@@ -1,9 +1,16 @@
 <html>
 	<head>
+		<title>GitHub Profiles</title>
+		<link rel="stylesheet" href="./public/css/reset.css">
+		<link rel="stylesheet" href="./public/css/app.css">
+		<link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
+		<header>
+			<h1>GitHub profiles</h1>
+		</header>
 		<main>
-			<section>
+			<section id='user_input'>
 				<input type='text' id='profile_name' placeholder='Enter the github profile you want to fetch'/>
 				<a href="#" id='fetch_github_profile'>Fetch</a>
 				<input type='text' id='profile_name_to_remove' placeholder='Enter the github profile you want to remove'/>
@@ -46,7 +53,8 @@
 				request.fail(function(jqXHR, textStatus, errorThrown){
 					if(jqXHR.status === 404) {
 						alert ('This user is not on GitHub');
-					}
+					};
+					$('#profile_name').val('');
 				});
 			});
 			$('#remove_github_profile').on('click',function(){
