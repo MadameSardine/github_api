@@ -30,13 +30,23 @@
 		<script type="text/javascript">
 			$('#fetch_github_profile').on('click',function(){
 				var profile_name =  $('#profile_name').val();
-				$.get('https://api.github.com/users/' + profile_name + '?client_id=a824d3e17c843963a2ef&client_secret=68e49a0f4ccfd8a1d5870bf9a5343ee1a3962bb4',function(githubProfile){
-					var source = $('#profileTemplate').html();
-					var template = Handlebars.compile(source);
-					$('#profiles').append(template(githubProfile));
-					$('#profiles article').last().addClass(profile_name);
-					$('#profile_name').val('');
+				var request = $.ajax({
+					url: 'https://api.github.com/users/' + profile_name + '?client_id=a824d3e17c843963a2ef&client_secret=68e49a0f4ccfd8a1d5870bf9a5343ee1a3962bb4',
+					type: "GET"
+				});
 
+				request.done(function(githubProfile){
+						var source = $('#profileTemplate').html();
+						var template = Handlebars.compile(source);
+						$('#profiles').append(template(githubProfile));
+						$('#profiles article').last().addClass(profile_name);
+						$('#profile_name').val('');
+					});
+
+				request.fail(function(jqXHR, textStatus, errorThrown){
+					if(jqXHR.status === 404) {
+						alert ('This user is not on GitHub');
+					}
 				});
 			});
 			$('#remove_github_profile').on('click',function(){
