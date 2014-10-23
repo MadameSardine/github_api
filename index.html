@@ -1,0 +1,50 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<main>
+			<section>
+				<input type='text' id='profile_name' placeholder='Enter the github profile you want to fetch'/>
+				<a href="#" id='fetch_github_profile'>Fetch</a>
+				<input type='text' id='profile_name_to_remove' placeholder='Enter the github profile you want to remove'/>
+				<a href="#" id='remove_github_profile'>Remove</a>
+			</section>
+			<section id='profiles'>
+			</section>
+		</main >
+		<template id='profileTemplate'>
+				<article>
+					<header>
+						<img src="{{avatar_url}}"/>
+						<h1>{{name}}</h1>
+						<h2>{{login}}</h2>
+					</header>
+					<p>
+						<strong id="followers"> {{followers}} followers </strong>
+						<strong id='repos'> {{public_repos}} public repos </strong>
+				</article>
+			
+		</template>
+		<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="handlebars.js"></script>
+		<script type="text/javascript">
+			$('#fetch_github_profile').on('click',function(){
+				var profile_name =  $('#profile_name').val();
+				$.get('https://api.github.com/users/' + profile_name + '?client_id=a824d3e17c843963a2ef&client_secret=68e49a0f4ccfd8a1d5870bf9a5343ee1a3962bb4',function(githubProfile){
+					var source = $('#profileTemplate').html();
+					var template = Handlebars.compile(source);
+					$('#profiles').append(template(githubProfile));
+					$('#profiles article').last().addClass(profile_name);
+					$('#profile_name').val('');
+
+				});
+			});
+			$('#remove_github_profile').on('click',function(){
+				var name_to_remove =  $('#profile_name_to_remove').val();
+				console.log(name_to_remove);
+					$('.'+ name_to_remove).remove();
+					$('#profile_name_to_remove').val('');
+				});
+		</script>
+	</body>
+</html>
