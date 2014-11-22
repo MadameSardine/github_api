@@ -1,8 +1,8 @@
 <html>
 	<head>
 		<title>GitHub Profiles</title>
-		<link rel="stylesheet" href="./public/css/reset.css">
-		<link rel="stylesheet" href="./public/css/app.css">
+		<link rel="stylesheet" href="/css/reset.css">
+		<link rel="stylesheet" href="/css/app.css">
 		<link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
@@ -30,10 +30,10 @@
 						<strong id="followers"> {{followers}} followers </strong>
 						<strong id='repos'> {{public_repos}} public repos </strong>
 				</article>
-			
+
 		</template>
-		<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
-		<script type="text/javascript" src="handlebars.js"></script>
+		<script type="text/javascript" src="/javascript/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="/javascript/handlebars.js"></script>
 		<script type="text/javascript">
 			$('#fetch_github_profile').on('click',function(){
 				var profile_name =  $('#profile_name').val();
